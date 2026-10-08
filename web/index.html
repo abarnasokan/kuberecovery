@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KubeRecovery · Recovery lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="brand-mark">K</span> KubeRecovery</a>
+    <div class="sidebar-caption">OPERATIONS WORKSPACE</div>
+    <a class="nav-item selected" href="#workspace"><span>◈</span> Recovery lab</a>
+    <a class="nav-item" href="#audit"><span>≡</span> Audit trail</a>
+    <a class="nav-item" href="/docs" target="_blank" rel="noopener"><span>↗</span> API reference</a>
+    <div class="sidebar-bottom"><span class="dot"></span> Local development<br><small>Evidence before action.</small></div>
+  </aside>
+  <main id="workspace">
+    <header><div class="breadcrumb">WORKSPACE <span>/</span> RECOVERY LAB</div><span id="mode" class="pill">Connecting</span></header>
+    <section class="page-heading"><div><div class="eyebrow">KUBERNETES OPERATIONS</div><h1>Recover with confidence.</h1><p>Understand a failed rollout. Review the evidence. Restore a healthy configuration.</p></div><button id="refresh" class="secondary">↻ Refresh</button></section>
+    <div id="mode-note" class="notice">Connecting to the local recovery service…</div>
+    <form id="auth" class="auth hidden"><label for="token">Local operator API token</label><input id="token" type="password" autocomplete="off" placeholder="Paste your live-mode token"><button type="submit">Connect</button></form>
+    <div id="error" class="error hidden" role="alert"></div>
+    <div id="activity" class="activity" role="status" aria-live="polite"></div>
+    <section class="stats" aria-label="Deployment overview">
+      <article><span class="stat-label">WORKLOAD</span><strong>sample-app</strong><small>kuberecovery-demo</small></article>
+      <article><span class="stat-label">DEPLOYMENT HEALTH</span><strong id="health">—</strong><small id="replicas">Waiting for evidence</small></article>
+      <article><span class="stat-label">HEALTHY CHECKPOINT</span><strong id="checkpoint">Not saved</strong><small id="checkpoint-note">Save before testing a failure</small></article>
+      <article><span class="stat-label">INCIDENTS</span><strong id="incident-count">0</strong><small id="incident-note">A clear record of every recovery</small></article>
+    </section>
+    <section class="panel lab-panel">
+      <div class="panel-heading"><div><h2>Your recovery workflow</h2><p>Start healthy, introduce a failure, then work through a controlled recovery.</p></div><span class="pill subtle">LOCAL LAB</span></div>
+      <ol class="steps"><li>Save checkpoint</li><li>Inject failure</li><li>Diagnose</li><li>Approve plan</li><li>Verify recovery</li></ol>
+      <div class="lab-actions"><button id="save-checkpoint" class="secondary">Save healthy checkpoint</button><div id="failure-controls"><label class="sr-only" for="scenario">Failure scenario</label><select id="scenario"><option value="readiness_probe">Readiness probe failure</option><option value="image_pull">Image pull failure</option><option value="crash_loop">Container crash loop</option></select><button id="inject" class="secondary">Inject failure</button></div><button id="diagnose">Collect evidence & diagnose <span>↗</span></button></div>
+    </section>
+    <div class="workspace-grid">
+      <section class="panel incident-panel"><div class="panel-heading"><div><h2>Incident queue</h2><p>Your most recent investigations</p></div><span id="queue-count" class="count">0</span></div><div id="incidents" class="incident-list"><div class="empty">No incidents yet.<br><small>Inject a failure and collect evidence to begin.</small></div></div></section>
+      <section class="panel detail-panel"><div class="panel-heading"><div><h2>Diagnosis & recovery</h2><p id="detail-subtitle">Select an incident to review its evidence.</p></div><span id="incident-status" class="pill subtle">READY WHEN YOU ARE</span></div><div id="detail" class="detail-empty"><div class="empty-symbol">◈</div><h3>Every recovery starts with evidence.</h3><p>Your diagnosis, action preview, and verification result will appear here.</p></div></section>
+    </div>
+    <section id="audit" class="panel audit-panel"><div class="panel-heading"><div><h2>Audit trail</h2><p>Checkpoints, approvals, and recovery outcomes in one timeline.</p></div><span class="pill subtle">PERSISTED LOCALLY</span></div><div class="table-wrap"><table><thead><tr><th>TIME</th><th>ACTION</th><th>ACTOR</th><th>INCIDENT</th></tr></thead><tbody id="audit-rows"><tr><td colspan="4" class="empty">Your actions will appear here.</td></tr></tbody></table></div></section>
+    <footer>KubeRecovery <span>•</span> A local Kubernetes reliability lab</footer>
+  </main>
+</body>
+</html>
